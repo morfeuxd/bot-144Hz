@@ -26,18 +26,18 @@ const client = new Client({
 
 const TOKEN = process.env.TOKEN;
 
-const CANAL_PEDIR_SET = "1465819278375911477";
-const CANAL_APROVAR_SET = "1465819278124126393";
+const CANAL_PEDIR_SET = "1468069332973260983";
+const CANAL_APROVAR_SET = "1468069332826194120";
 
-const CARGO_MEMBRO = "1465819276643533041";     // cargo após aprovação
-const CARGO_SEM_SET = "1465819276643533040"; // cargo inicial
+const CARGO_MEMBRO = "1468069332239257692";   // cargo após aprovação
+const CARGO_SEM_SET = "1468069332239257690";  // cargo inicial
 
 /* ================================================ */
 
-client.once("ready", async () => {
+/* ===== EVENTO READY (CORRIGIDO) ===== */
+client.once(Events.ClientReady, async client => {
   console.log(`🤖 Bot online como ${client.user.tag}`);
 
-  // Envia o embed inicial no canal de pedir set
   const canal = await client.channels.fetch(CANAL_PEDIR_SET);
 
   const embed = new EmbedBuilder()
@@ -55,6 +55,7 @@ client.once("ready", async () => {
   await canal.send({ embeds: [embed], components: [botao] });
 });
 
+/* ===== INTERAÇÕES ===== */
 client.on(Events.InteractionCreate, async interaction => {
 
   /* ========= ABRIR MODAL ========= */
@@ -136,15 +137,12 @@ client.on(Events.InteractionCreate, async interaction => {
     const nickname = embedOriginal.fields.find(f => f.name === "Nickname").value;
     const id = embedOriginal.fields.find(f => f.name === "ID").value;
 
-    // altera nickname
     await membro.setNickname(`${nickname} | ${id}`);
 
-    // remove cargo "Sem Set"
     if (membro.roles.cache.has(CARGO_SEM_SET)) {
       await membro.roles.remove(CARGO_SEM_SET);
     }
 
-    // adiciona cargo aprovado
     await membro.roles.add(CARGO_MEMBRO);
 
     const embedAprovado = new EmbedBuilder()
