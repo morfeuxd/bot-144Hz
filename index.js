@@ -26,11 +26,11 @@ const client = new Client({
 
 const TOKEN = process.env.TOKEN;
 
-const CANAL_PEDIR_SET = "1468069332973260983";
-const CANAL_APROVAR_SET = "1468069332826194120";
+const CANAL_PEDIR_SET = "1469272502072115375";
+const CANAL_APROVAR_SET = "1469271830815571969";
 
-const CARGO_MEMBRO = "1468069332239257692";   // cargo após aprovação
-const CARGO_SEM_SET = "1468069332239257690";  // cargo inicial
+const CARGO_MEMBRO = "1396182340295983154";   // cargo após aprovação
+const CARGO_SEM_SET = "1469347522819653854";  // cargo inicial
 
 /* ================================================ */
 
