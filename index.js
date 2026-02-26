@@ -124,7 +124,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
     await interaction.reply({
       content: "✅ Seu pedido foi enviado para aprovação.",
-      ephemeral: true
+      flags: 64
     });
   }
 
