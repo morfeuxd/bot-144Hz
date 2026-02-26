@@ -182,3 +182,6 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 client.login(TOKEN);
+process.on('unhandledRejection', err => {
+  console.error('Unhandled Rejection:', err)
+});
